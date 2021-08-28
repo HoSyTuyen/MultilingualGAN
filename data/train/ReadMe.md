@@ -1,1 +1,1 @@
-Add all your training data here
+Put all your training data here
