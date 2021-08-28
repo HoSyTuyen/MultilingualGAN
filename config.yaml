@@ -1,0 +1,27 @@
+project_name: Img2Img_blue_180con
+
+batch_size: 32
+abs_epoch: 10
+train_epoch: 90
+
+con_lambda: 180
+adv_lambda: 2
+
+is_cuda: "True"
+
+train_data: "train"
+test_data: "test"
+
+ngf: 32
+ndf: 32
+nb: 4
+input_h: 1024
+input_w: 64
+
+lrD: 0.0002
+lrG: 0.0002
+beta1: 0.5
+beta2: 0.999
+
+latest_generator_model: ""
+latest_discriminator_model: ""
