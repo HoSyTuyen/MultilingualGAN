@@ -9,7 +9,7 @@
 - Pytorch 1.6 or above
 - Torchvision 0.7.0 or above
 
-**2. Data preparation:** put all train data and test data on data/train/ and data/test/ respectively. Each sample should contain a pair samples between two domains as below
+**2. Data preparation:** put all train data and test data on `data/train/` and `data/test/` respectively. Each sample should contain a pair samples between two domains as below
 
 ![0246_samples](https://user-images.githubusercontent.com/32817741/131226858-f00ef91b-24da-4f57-a1f2-1348a880975f.png)
 ![0247_samples](https://user-images.githubusercontent.com/32817741/131226875-3b084723-d9cf-4f44-b575-6c5060073790.png)
