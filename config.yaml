@@ -1,0 +1,43 @@
+project_name: Cinamon_OctConv_1_180_abs
+
+batch_size: 32
+abs_epoch: 2
+train_epoch: 100
+
+con_lambda: 180
+adv_lambda: 1
+
+is_cuda: "True"
+
+
+data_path: "data/Cinamon_newRes"
+train_data: "train"
+test_data: "test"
+
+save_epoch: 10
+
+ngf: 32
+ndf: 32
+nb: 4
+input_h: 1376
+input_w: 64
+
+lrD: 0.0002
+lrG: 0.0002
+beta1: 0.0 #Default: 0.5
+beta2: 0.999
+
+latest_generator_model: ""
+latest_discriminator_model: ""
+start_epoch: 0
+
+save_result_per_epoch: "True"
+
+optimizer: "SGD" # ["Adam", "SGD"]
+
+generator_arch: "OctConv" # [baseline, OctConv, VDCNN, ResNet]
+discriminator_arch: "baseline" # [baseline, OctConv, BigGan]
+#test_multi_lan_data_root: "data/Mulilingual_words/Image" #""  #Dung de test multilingual trong luc train, DEFAULT = "" 
+test_multi_lan_data_root: "" #""  #Dung de test multilingual trong luc train, DEFAULT = "" 
+#test_multi_lan_data_sub: "Full" #"" #Dung de test multilingual trong luc train, DEFAULT = "" 
+test_multi_lan_data_sub: "" #"" #Dung de test multilingual trong luc train, DEFAULT = "" 
