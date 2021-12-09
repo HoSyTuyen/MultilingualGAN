@@ -1,7 +1,7 @@
 project_name: Cinamon_OctConv_1_180_abs
 
-batch_size: 32
-abs_epoch: 2
+batch_size: 8
+abs_epoch: 15
 train_epoch: 100
 
 con_lambda: 180
@@ -33,7 +33,8 @@ start_epoch: 0
 
 save_result_per_epoch: "True"
 
-optimizer: "SGD" # ["Adam", "SGD"]
+optimizer: "Adam" # ["Adam", "SGD"]
+abstraction: True
 
 generator_arch: "OctConv" # [baseline, OctConv, VDCNN, ResNet]
 discriminator_arch: "baseline" # [baseline, OctConv, BigGan]

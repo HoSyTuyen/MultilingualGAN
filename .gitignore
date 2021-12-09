@@ -1,0 +1,8 @@
+# Ignore everything
+*
+networkv2/__pycache__/
+# But not these files...
+!.gitignore
+!networkv2/
+!config.yaml
+!*.py

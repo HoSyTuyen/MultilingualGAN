@@ -58,8 +58,9 @@ class HWGAN(object):
 
         self.G_scheduler = optim.lr_scheduler.MultiStepLR(optimizer=self.G_optimizer, milestones=[self.config['train_epoch'] // 2, self.config['train_epoch'] // 4 * 3], gamma=0.1)
         self.D_scheduler = optim.lr_scheduler.MultiStepLR(optimizer=self.D_optimizer, milestones=[self.config['train_epoch'] // 2, self.config['train_epoch'] // 4 * 3], gamma=0.1)
- 
-        #self.abs_stage()
+
+        if self.config['abstraction'] == True:
+            self.abs_stage()
         self.per_stage()
 
         #self.testing_fid()
