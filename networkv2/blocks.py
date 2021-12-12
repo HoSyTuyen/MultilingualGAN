@@ -171,9 +171,9 @@ class OctConv(nn.Module):
         hf_ch_out = int(c * (1 - alpha_out))
         lf_ch_out = c - hf_ch_out
         if order:
-        	index_hf = [i for i in range(hf_ch_out)] 
+            index_hf = [i for i in range(hf_ch_out)] 
         else:
-        	index_hf = random.sample(list(range(c)), hf_ch_out)
+            index_hf = random.sample(list(range(c)), hf_ch_out)
         index_lf = [i for i in range(c) if i not in index_hf] 
         assert len(index_hf)==hf_ch_out 
         assert len(index_lf)==lf_ch_out 

@@ -7,7 +7,7 @@ from torchvision import transforms
 import torch.nn.functional as F
 import os 
 import torchvision.models as models
-from networkv2.generator import GeneratorOctConv
+from networkv2.generator import GeneratorOctConv, GeneratorBaselineOctConv
 from networkv2.network import GPPatchMcResDis_yaxing, GPPatchMcResDis, BigGanDiscriminator
 from FID.fid_score import calculate_fid_given_paths
 from pathlib import Path
@@ -59,8 +59,8 @@ class HWGAN(object):
         self.G_scheduler = optim.lr_scheduler.MultiStepLR(optimizer=self.G_optimizer, milestones=[self.config['train_epoch'] // 2, self.config['train_epoch'] // 4 * 3], gamma=0.1)
         self.D_scheduler = optim.lr_scheduler.MultiStepLR(optimizer=self.D_optimizer, milestones=[self.config['train_epoch'] // 2, self.config['train_epoch'] // 4 * 3], gamma=0.1)
 
-        if self.config['abstraction'] == True:
-            self.abs_stage()
+        # if self.config['abstraction'] == True:
+        #     self.abs_stage()
         self.per_stage()
 
         #self.testing_fid()
@@ -92,6 +92,8 @@ class HWGAN(object):
             G = networks.generator(nf = self.config['ngf'], nb = self.config['nb'])
         elif self.config['generator_arch'] == 'OctConv':
             G = GeneratorOctConv(nf = self.config['ngf'], nb = self.config['nb'])
+        elif self.config['generator_arch'] == 'BaselineOctConv':
+            G = GeneratorBaselineOctConv(nf = self.config['ngf'], nb = self.config['nb'])
         else:
             raise NotImplementedError
         if self.config['latest_generator_model'] != '':
