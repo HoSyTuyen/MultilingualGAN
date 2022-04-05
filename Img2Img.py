@@ -11,7 +11,7 @@ from networkv2.generator import GeneratorOctConv, GeneratorBaselineOctConv
 from networkv2.network import GPPatchMcResDis_yaxing, GPPatchMcResDis, BigGanDiscriminator
 from FID.fid_score import calculate_fid_given_paths
 from pathlib import Path
-
+import lpips
 from tqdm import tqdm
 
 class HWGAN(object):
@@ -44,7 +44,12 @@ class HWGAN(object):
         self.RestNet18.eval()
 
         self.BCE_loss = nn.BCELoss().to(self.device)
-        self.L1_loss = nn.L1Loss().to(self.device)
+        if self.config['con_loss'] == 'perceptual':
+            self.L1_loss = nn.L1Loss().to(self.device)
+        elif self.config['con_loss'] == 'lpips':
+            self.LPIPS_loss = lpips.LPIPS(net='vgg').to(self.device)
+        else:
+            raise NotImplementedError
 
 
         if self.config['optimizer'] == 'Adam':
@@ -102,7 +107,7 @@ class HWGAN(object):
             else:
                 G.load_state_dict(torch.load(self.config['latest_generator_model'], map_location=lambda storage, loc: storage))
         G.to(self.device)
-
+        print(G)
         return G
 
     def build_discriminator(self):
@@ -266,11 +271,14 @@ class HWGAN(object):
                 D_fake = self.D(G_)
                 D_fake_loss = self.BCE_loss(D_fake, real)*self.config['adv_lambda']
 
-                x_feature = self.RestNet18((x_pr + 1) / 2)
-                #real_feature = self.RestNet18((x_hw + 1) / 2)
-                G_feature = self.RestNet18((G_ + 1) / 2)
-                Con_loss = self.config['con_lambda'] * self.L1_loss(G_feature, x_feature.detach())
-                #Con_loss = self.config['con_lambda'] * self.L1_loss(G_feature, real_feature.detach())
+                if self.config['con_loss'] == 'perceptual':
+                    x_feature = self.RestNet18((x_pr + 1) / 2)
+                    G_feature = self.RestNet18((G_ + 1) / 2)
+                    Con_loss = self.config['con_lambda'] * self.L1_loss(G_feature, x_feature.detach())
+                elif self.config['con_loss'] == 'lpips':
+                    Con_loss = self.config['con_lambda'] * torch.mean(self.LPIPS_loss(G_, x_pr))
+                else:
+                    raise NotImplementedError
 
                 Gen_loss = D_fake_loss + Con_loss
 

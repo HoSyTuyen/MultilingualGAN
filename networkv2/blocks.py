@@ -200,7 +200,7 @@ class OctConv(nn.Module):
             hf, lf = x
             hf, lf = self.H2H(hf) + self.upsample(self.L2H(lf)), self.L2L(lf) + self.H2L(self.avg_pool(hf)) 
             hf, lf = self.mask(hf, lf, alpha_in=alpha_in, alpha_out=alpha_out)
-            return hf, lf  
+            return hf, lf
 
 class ResBlocks(nn.Module):
     def __init__(self, num_blocks, dim, norm, activation, pad_type):

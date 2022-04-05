@@ -1,23 +1,23 @@
-project_name: Cinamon_BaselineOctConv_1_90_ngf64_ndf64
+project_name: Cinamon_Gray_BaselineOctConv_ngf64_lpips_1_20
 
-batch_size: 64
+batch_size: 8
 abs_epoch: 15
 train_epoch: 300
 
-con_lambda: 90
+con_lambda: 20
 adv_lambda: 1
 
 is_cuda: "True"
 
 
-data_path: "data/Cinamon_newRes"
+data_path: "data/Cinamon_Gray"
 train_data: "train"
 test_data: "test"
 
 save_epoch: 10
 
 ngf: 64
-ndf: 64
+ndf: 32
 nb: 4
 input_h: 1376
 input_w: 64
@@ -35,6 +35,7 @@ save_result_per_epoch: "True"
 
 optimizer: "Adam" # ["Adam", "SGD"]
 abstraction: False
+con_loss: "lpips" # ["lpips", "perceptual"]
 
 generator_arch: "BaselineOctConv" # [baseline, OctConv, VDCNN, ResNet,BaselineOctConv]
 discriminator_arch: "baseline" # [baseline, OctConv, BigGan]

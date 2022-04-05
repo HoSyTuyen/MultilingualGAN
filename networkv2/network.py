@@ -66,8 +66,9 @@ class ContentEncoder(nn.Module):
         out=self.conv3(out, alpha_in=alpha_in, alpha_out=alpha_out)
         out=self.bn3(out)
         out=self.re3(out)
-
         # residual blocks
+
+
         out = self.Res1(out, alpha_in, alpha_out)
         out = self.Res2(out, alpha_in, alpha_out)
         out = self.Res3(out, alpha_in, alpha_out)
