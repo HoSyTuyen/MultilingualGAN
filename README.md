@@ -1,6 +1,6 @@
 # MultilingualGAN
 
-#### The official source code for the paper *"Multilingual-GAN: A Multilingual GAN-based Approach for Handwritten Generation"*
+#### The official source code for the paper *[Multilingual-GAN: A Multilingual GAN-based Approach for Handwritten Generation](https://ieeexplore.ieee.org/document/9585285)*
 
 **Abstract:** Handwritten Text Recognition (HTR) is a difficult problem because of the diversity of calligraphic styles. To enhance the accuracy of HTR systems, a large amount of training data is required. The previous methods aim at generating handwritten images from input strings via RNN models such as LSTM or GRU. However, these methods require a predefined alphabet corresponding to a given language. Thus, they can not well adapt to a new languages. To address this problem, we propose an Image2Image-based method named Multilingual-GAN, which translates a printed text image into a handwritten style one. The main advantage of this approach is that the model does notdepend on any language alphabets. Therefore, our model can be used on a new language without re-training on a new dataset.The quantitative results demonstrate that our proposed method outperforms other state-of-the-art models.
 
